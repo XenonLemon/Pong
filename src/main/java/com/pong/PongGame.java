@@ -14,10 +14,12 @@ public class PongGame extends JPanel implements MouseMotionListener {
     private int aiScore;
     private Ball ball;
     // step 1 add any other private variables you may need to play the game.
+    private Paddle playerPaddle;
 
     public PongGame() {
 
         aiPaddle = new Paddle(610, 240, 50, 9, Color.WHITE);
+        playerPaddle = new Paddle(0, 240, 50, 9. Color.BLUE)
         JLabel pScore = new JLabel("0");
         JLabel aiScore = new JLabel("0");
         pScore.setBounds(280, 440, 20, 20);
