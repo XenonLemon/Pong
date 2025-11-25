@@ -1,3 +1,7 @@
+//Peter Daniel
+//11/21/25
+//This class is the main class for the Pong game, it has the paddles, the ball, the score, and the user input.
+
 package com.pong;
 
 import javax.swing.*;
@@ -15,11 +19,13 @@ public class PongGame extends JPanel implements MouseMotionListener {
     private Ball ball;
     // step 1 add any other private variables you may need to play the game.
     private Paddle playerPaddle;
+    private Paddle paddleWall;
+    private SlowDown slowDown;
+    private Speedup speedUp;
 
     public PongGame() {
 
         aiPaddle = new Paddle(610, 240, 50, 9, Color.WHITE);
-        playerPaddle = new Paddle(0, 240, 50, 9. Color.BLUE)
         JLabel pScore = new JLabel("0");
         JLabel aiScore = new JLabel("0");
         pScore.setBounds(280, 440, 20, 20);
@@ -31,6 +37,10 @@ public class PongGame extends JPanel implements MouseMotionListener {
         ball = new Ball(200, 200, 10, 3, Color.RED, 10);
 
         //create any other objects necessary to play the game.
+        playerPaddle = new Paddle(10, 220, 50, 9, Color.BLUE);
+        paddleWall = new Paddle(315, 180, 100, 0, Color.YELLOW);
+        slowDown = new SlowDown(310, 10, 80, 30);
+        speedUp = new Speedup(310, 370, 80, 30);
 
     }
 
@@ -59,6 +69,10 @@ public class PongGame extends JPanel implements MouseMotionListener {
         aiPaddle.draw(g);
         
         //call the "draw" function of any visual component you'd like to show up on the screen.
+        playerPaddle.draw(g);
+        paddleWall.draw(g);
+        speedUp.draw(g);
+        slowDown.draw(g);
 
     }
 
@@ -67,6 +81,17 @@ public class PongGame extends JPanel implements MouseMotionListener {
     // postcondition: one frame of the game is "played"
     public void gameLogic() {
         //add commands here to make the game play propperly
+        ball.moveBall();
+        ball.bounceOffwalls(0, 460);
+        playerPaddle.moveY(userMouseY);
+        if(playerPaddle.isTouching(ball)){
+            ball.reverseX();
+        }
+        
+
+        if(paddleWall.isTouching(ball)){
+            ball.reverseX();
+        }
         
         aiPaddle.moveY(ball.getY());
 
@@ -85,6 +110,21 @@ public class PongGame extends JPanel implements MouseMotionListener {
     // pixels) and the ai scores
     // if the ball goes off the left edge (0)
     public void pointScored() {
+        if (ball.getX() > 640) {
+            playerScore++;
+            ball.setX(200);
+            ball.sety(200);
+            ball.moveBall();
+            ball.reverseY();
+        }
+        if (ball.getX() < 0) {
+            aiScore++;
+            ball.setX(200);
+            ball.sety(200);
+            ball.moveBall();
+            ball.reverseY();
+
+        }
 
     }
 
