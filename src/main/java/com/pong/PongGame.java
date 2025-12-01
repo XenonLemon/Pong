@@ -39,8 +39,8 @@ public class PongGame extends JPanel implements MouseMotionListener {
         //create any other objects necessary to play the game.
         playerPaddle = new Paddle(10, 220, 50, 9, Color.BLUE);
         paddleWall = new Paddle(315, 180, 100, 0, Color.YELLOW);
-        slowDown = new SlowDown(310, 10, 80, 30);
-        speedUp = new Speedup(310, 370, 80, 30);
+        slowDown = new SlowDown(310, 30, 80, 30);
+        speedUp = new Speedup(310, 350, 80, 30);
 
     }
 
@@ -101,6 +101,15 @@ public class PongGame extends JPanel implements MouseMotionListener {
  
         pointScored();
 
+        if(speedUp.isTouching(ball)){
+           ball.setChangeX(ball.getChangeX()*1.1);
+           //ball.setChangeY(ball.getChangeY()*1.1); 
+        }
+        if(slowDown.isTouching(ball)){
+           ball.setChangeX(ball.getChangeX()*0.9);
+           //ball.setChangeY(ball.getChangeY()*0.9);
+        }
+
     }
 
     // precondition: ball is a non-null object that exists in the world
@@ -116,6 +125,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
             ball.sety(200);
             ball.moveBall();
             ball.reverseY();
+            ball.setChangeX(-10);
         }
         if (ball.getX() < 0) {
             aiScore++;
@@ -123,6 +133,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
             ball.sety(200);
             ball.moveBall();
             ball.reverseY();
+            ball.setChangeX(-10);
 
         }
 
