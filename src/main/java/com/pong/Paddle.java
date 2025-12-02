@@ -9,7 +9,7 @@ public class Paddle {
 	private int height;
 	private int speed;
 	private Color color;
-	private int width=15;
+	private int width=25;
 	
 	
 	public Paddle (int x, int y, int height, int speed, Color color) {

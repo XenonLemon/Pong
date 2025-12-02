@@ -25,7 +25,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
 
     public PongGame() {
 
-        aiPaddle = new Paddle(610, 240, 50, 9, Color.WHITE);
+        aiPaddle = new Paddle(610, 240, 50, 7, Color.WHITE);
         JLabel pScore = new JLabel("0");
         JLabel aiScore = new JLabel("0");
         pScore.setBounds(280, 440, 20, 20);
@@ -37,7 +37,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
         ball = new Ball(200, 200, 10, 3, Color.RED, 10);
 
         //create any other objects necessary to play the game.
-        playerPaddle = new Paddle(10, 220, 50, 9, Color.BLUE);
+        playerPaddle = new Paddle(10, 190, 80, 9, Color.BLUE);
         paddleWall = new Paddle(315, 180, 100, 0, Color.YELLOW);
         slowDown = new SlowDown(310, 30, 80, 30);
         speedUp = new Speedup(310, 350, 80, 30);
@@ -103,11 +103,13 @@ public class PongGame extends JPanel implements MouseMotionListener {
 
         if(speedUp.isTouching(ball)){
            ball.setChangeX(ball.getChangeX()*1.1);
-           //ball.setChangeY(ball.getChangeY()*1.1); 
+           
+            
         }
         if(slowDown.isTouching(ball)){
            ball.setChangeX(ball.getChangeX()*0.9);
-           //ball.setChangeY(ball.getChangeY()*0.9);
+           
+           
         }
 
     }
