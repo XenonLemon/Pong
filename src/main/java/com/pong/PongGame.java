@@ -25,7 +25,7 @@ public class PongGame extends JPanel implements MouseMotionListener {
 
     public PongGame() {
 
-        aiPaddle = new Paddle(610, 240, 50, 7, Color.WHITE);
+        aiPaddle = new Paddle(610, 240, 50, 6, Color.WHITE);
         JLabel pScore = new JLabel("0");
         JLabel aiScore = new JLabel("0");
         pScore.setBounds(280, 440, 20, 20);
